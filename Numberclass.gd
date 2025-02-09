@@ -63,7 +63,7 @@ func dec() -> Numberclass: return sub(ONE)
 func addf(num: float) -> Numberclass: return add(new(num))
 func add(num: Numberclass) -> Numberclass:
 	var delta: float = exponential_delta(num)
-	if delta > 7: return max(num)
+	if delta > 7: return self.max(num)
 	
 	var min: Numberclass = self.min(num)
 	var max: Numberclass = self.max(num)
@@ -135,7 +135,8 @@ func ltf(num: float) -> bool: return less_than(new(num))
 func less_thanf(num: float) -> bool: return less_than(new(num))
 	
 func less_than(num: Numberclass) -> bool:
-	if _exponent == num._exponent: return _mantissa < num._mantissa
+	var delta: float = exponential_delta(num)
+	if delta < 6: return get_real_mantissa() < num.get_real_mantissa()
 	else: return _exponent < num._exponent
 	
 func gt(num: Numberclass) -> bool: return greater_than(num)
@@ -143,7 +144,8 @@ func gtf(num: float) -> bool: return greater_than(new(num))
 func greater_thanf(num: float) -> bool: return greater_than(new(num))
 	
 func greater_than(num: Numberclass) -> bool:
-	if _exponent == num._exponent: return _mantissa > num._mantissa
+	var delta: float = exponential_delta(num)
+	if delta < 6: return get_real_mantissa() > num.get_real_mantissa()
 	else: return _exponent > num._exponent
 	
 func lte(num: Numberclass) -> bool: return less_than_or_equal_to(num)
